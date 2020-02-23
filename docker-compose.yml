@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+    
+    doproj-db:
+        image: ${dockerId}/doproj-db:v1
+        container_name: doproj-db
+        build:
+            context: ./doproj-db
+        networks:
+            - doproj-net
+
+    doproj-app:
+        image: ${dockerId}/doproj-app:v1
+        container_name: doproj-app
+        build:
+            context: ./doproj-app
+        ports:
+            - 8080:8080
+        depends_on:
+            - doproj-db
+        volumes:
+            - C:\Users\alexa\Documents\1_Files\AP\2019-2020\DevOps\labo_4\do_proj\doproj-app:/usr/src/app
+        networks:
+            - doproj-net
+
+networks: 
+    doproj-net:
